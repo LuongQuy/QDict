@@ -14,7 +14,7 @@ import java.util.logging.Logger;
  * @author Quy
  */
 public class addWord extends javax.swing.JFrame {
-
+    private int SeLan = 1;
     /**
      * Creates new form addWord
      */
@@ -36,6 +36,7 @@ public class addWord extends javax.swing.JFrame {
         tfWord = new javax.swing.JTextField();
         tfMean = new javax.swing.JTextField();
         btAddWord = new javax.swing.JButton();
+        cbSeLan = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -50,32 +51,42 @@ public class addWord extends javax.swing.JFrame {
             }
         });
 
+        cbSeLan.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "En->Vi", "Vi->En" }));
+        cbSeLan.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cbSeLanItemStateChanged(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(56, 56, 56)
+                .addGap(27, 27, 27)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1)
                     .addComponent(jLabel2))
-                .addGap(39, 39, 39)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btAddWord)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(tfWord)
-                        .addComponent(tfMean, javax.swing.GroupLayout.DEFAULT_SIZE, 155, Short.MAX_VALUE)))
-                .addContainerGap(89, Short.MAX_VALUE))
+                    .addComponent(tfMean, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(tfWord, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(cbSeLan, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(52, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(33, 33, 33)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                     .addComponent(jLabel1)
+                    .addComponent(cbSeLan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(tfWord, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                     .addComponent(jLabel2)
                     .addComponent(tfMean, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
@@ -89,14 +100,33 @@ public class addWord extends javax.swing.JFrame {
     private void btAddWordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAddWordActionPerformed
         // TODO add your handling code here:
         String str = tfWord.getText()+"<html><i>-"+tfWord.getText()+"</i><br/><ul><li><font color='#cc0000'><b>"+tfMean.getText()+"</b></font></ul></html>\r\n";
-        try {
-            WriteData.WriteFile("data/addedE_V.txt", str);
-        } catch (IOException ex) {
-            Logger.getLogger(addWord.class.getName()).log(Level.SEVERE, null, ex);
+        if(1 == SeLan){
+            try {
+                WriteData.WriteFile("data/addedE_V.txt", str);
+            } catch (IOException ex) {
+                Logger.getLogger(addWord.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }else{
+            try {
+                WriteData.WriteFile("data/addedV_E.txt", str);
+            } catch (IOException ex) {
+                Logger.getLogger(addWord.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
+        
         tfWord.setText("");
         tfMean.setText("");
     }//GEN-LAST:event_btAddWordActionPerformed
+
+    private void cbSeLanItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbSeLanItemStateChanged
+        if("En->Vi".equals(cbSeLan.getSelectedItem().toString())){
+            SeLan = 1;
+        }
+        else{
+            SeLan = 2;
+        }
+        
+    }//GEN-LAST:event_cbSeLanItemStateChanged
 
     /**
      * @param args the command line arguments
@@ -135,6 +165,7 @@ public class addWord extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btAddWord;
+    private javax.swing.JComboBox<String> cbSeLan;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JTextField tfMean;

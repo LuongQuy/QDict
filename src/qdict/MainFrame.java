@@ -23,8 +23,9 @@ import javax.swing.JEditorPane;
 public class MainFrame extends javax.swing.JFrame {
     private ReadData dataEv;
     private ReadData dataVe;
+    private ReadData dataAddedEv;
+    private ReadData dataAddedVe;
     private int SeLan = 1;
-    private static final String VOICENAME = "kevin16";
     /**
      * Creates new form MainFrame
      */
@@ -48,6 +49,18 @@ public class MainFrame extends javax.swing.JFrame {
         
         try {
             dataVe = new ReadData("data/V_E.txt");
+        } catch (IOException ex) {
+            Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        try {
+            dataAddedEv = new ReadData("data/addedE_V.txt");
+        } catch (IOException ex) {
+            Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        try {
+            dataAddedVe = new ReadData("data/addedV_E.txt");
         } catch (IOException ex) {
             Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -185,14 +198,22 @@ public class MainFrame extends javax.swing.JFrame {
                 word = Std.StdStrE(word);
                 txtMean.setText(dataEv.searchMean(word));
             } catch (NullPointerException e) {
-                txtMean.setText("<html><i color='red'>Không có từ cần tìm kiếm</i></html>");
+                try {
+                    txtMean.setText(dataAddedEv.searchMean(word));
+                } catch (NullPointerException e1) {
+                    txtMean.setText("<html><i color='red'>Không có từ cần tìm kiếm</i></html>");
+                } 
             }
         }else{
             word = Std.StdStrV(word);
             try {
                 txtMean.setText(dataVe.searchMean(word));
             } catch (NullPointerException e) {
-                txtMean.setText("<html><i color='red'>Không có từ cần tìm kiếm</i></html>");
+                try {
+                    txtMean.setText(dataAddedVe.searchMean(word));
+                } catch (Exception e1) {
+                    txtMean.setText("<html><i color='red'>Không có từ cần tìm kiếm</i></html>");
+                }
             }
         }        
     }//GEN-LAST:event_btSearchActionPerformed
