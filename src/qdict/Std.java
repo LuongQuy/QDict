@@ -10,15 +10,10 @@ package qdict;
  * @author Quy
  */
 abstract class Std {
-    public static String StdStrE(String str){
+    public static String StdStr(String str){
         str = str.trim();
         str = str.replaceAll("\\s+"," ");
         str = str.toLowerCase();
-        return str;
-    }
-    public static String StdStrV(String str){
-        str = str.trim();
-        str = str.replaceAll("\\s+"," ");
         return str;
     }
 }

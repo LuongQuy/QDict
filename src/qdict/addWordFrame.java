@@ -6,20 +6,26 @@
 package qdict;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author Quy
  */
-public class addWord extends javax.swing.JFrame {
+public class addWordFrame extends javax.swing.JFrame {
     private int SeLan = 1;
+    private HashMap mapEv;
+    private HashMap mapVe;
     /**
      * Creates new form addWord
      */
-    public addWord() {
+    public addWordFrame(HashMap mapEv, HashMap mapVe) {
         initComponents();
+        this.mapEv = mapEv;
+        this.mapVe = mapVe;
     }
 
     /**
@@ -37,6 +43,7 @@ public class addWord extends javax.swing.JFrame {
         tfMean = new javax.swing.JTextField();
         btAddWord = new javax.swing.JButton();
         cbSeLan = new javax.swing.JComboBox<>();
+        btClose = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -58,6 +65,13 @@ public class addWord extends javax.swing.JFrame {
             }
         });
 
+        btClose.setText("Đóng");
+        btClose.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btCloseActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -69,14 +83,21 @@ public class addWord extends javax.swing.JFrame {
                     .addComponent(jLabel2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btAddWord)
-                    .addComponent(tfMean, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(tfWord, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(cbSeLan, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(cbSeLan, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(btAddWord)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btClose))
+                        .addComponent(tfMean, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(52, Short.MAX_VALUE))
         );
+
+        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btAddWord, btClose});
+
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
@@ -90,7 +111,9 @@ public class addWord extends javax.swing.JFrame {
                     .addComponent(jLabel2)
                     .addComponent(tfMean, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(btAddWord)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btAddWord)
+                    .addComponent(btClose))
                 .addContainerGap(168, Short.MAX_VALUE))
         );
 
@@ -99,21 +122,40 @@ public class addWord extends javax.swing.JFrame {
 
     private void btAddWordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAddWordActionPerformed
         // TODO add your handling code here:
-        String str = tfWord.getText()+"<html><i>-"+tfWord.getText()+"</i><br/><ul><li><font color='#cc0000'><b>"+tfMean.getText()+"</b></font></ul></html>\r\n";
-        if(1 == SeLan){
-            try {
-                WriteData.WriteFile("data/addedE_V.txt", str);
-            } catch (IOException ex) {
-                Logger.getLogger(addWord.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }else{
-            try {
-                WriteData.WriteFile("data/addedV_E.txt", str);
-            } catch (IOException ex) {
-                Logger.getLogger(addWord.class.getName()).log(Level.SEVERE, null, ex);
+        String word = Std.StdStr(tfWord.getText());
+        String mean = Std.StdStr(tfMean.getText());
+        String str = word+"<html><font color='#cc0000'><b>"+mean+"</b></font></html>\r\n";
+//        str = Std.StdStr(str);
+        if(!("".equals(tfWord.getText())||"".equals(tfMean.getText()))){
+            if(1 == SeLan){
+                try {
+                    if(mapEv.containsKey(word)){
+                        JOptionPane.showMessageDialog(null, "Từ "+word+" đã có trong từ điển!", "Warning", JOptionPane.WARNING_MESSAGE);
+                    }
+                    else{
+                        JOptionPane.showMessageDialog(null, "Bạn có chắc muốn thêm từ " + word, "Thêm từ", JOptionPane.INFORMATION_MESSAGE);
+                    WriteData.WriteFile("data/addedE_V.txt", str);
+                    mapEv.put(word, "<html><font color='#cc0000'><b>"+mean+"</b></font></html>");
+                    }
+                } catch (IOException ex) {
+                    Logger.getLogger(addWordFrame.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }else{
+                try {
+                    if(mapVe.containsKey(word)){
+                        JOptionPane.showMessageDialog(null, "Từ "+word+" đã có trong từ điển!", "Warning", JOptionPane.WARNING_MESSAGE);
+                    }
+                    else{
+                        JOptionPane.showMessageDialog(null, "Bạn có chắc muốn thêm từ " + word, "Thêm từ", JOptionPane.INFORMATION_MESSAGE);
+                        WriteData.WriteFile("data/addedV_E.txt", str);
+                        mapVe.put(word, "<html><font color='#cc0000'><b>"+mean+"</b></font></html>");
+                    }
+                    
+                } catch (IOException ex) {
+                    Logger.getLogger(addWordFrame.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         }
-        
         tfWord.setText("");
         tfMean.setText("");
     }//GEN-LAST:event_btAddWordActionPerformed
@@ -128,43 +170,14 @@ public class addWord extends javax.swing.JFrame {
         
     }//GEN-LAST:event_cbSeLanItemStateChanged
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(addWord.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(addWord.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(addWord.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(addWord.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
+    private void btCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCloseActionPerformed
+        this.setVisible(false);
+    }//GEN-LAST:event_btCloseActionPerformed
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new addWord().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btAddWord;
+    private javax.swing.JButton btClose;
     private javax.swing.JComboBox<String> cbSeLan;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

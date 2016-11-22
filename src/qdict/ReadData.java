@@ -26,7 +26,6 @@ public class ReadData {
         BufferedReader fileInput = null;
         String txtLine = "";
         try {
-            
             fileInput = new BufferedReader(new FileReader(fileName));
             while(null != (txtLine = fileInput.readLine())){
                 String temp = "";
@@ -53,6 +52,8 @@ public class ReadData {
                     }
                     t = "";
                 }
+                str1 = Std.StdStr(str1);
+                str2 = Std.StdStr(str2);
                 System.out.println(str1);
                 System.out.println(str2);
                 map.put(str1, str2);
@@ -70,6 +71,10 @@ public class ReadData {
         
     }
     public String searchMean(String word){
+        word = Std.StdStr(word);
         return map.get(word).toString();
+    }
+    public HashMap getMap(){
+        return map;
     }
 }

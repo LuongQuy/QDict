@@ -26,6 +26,8 @@ public class MainFrame extends javax.swing.JFrame {
     private ReadData dataAddedEv;
     private ReadData dataAddedVe;
     private int SeLan = 1;
+    private boolean addBoolean = false;
+    private addWordFrame addFrame;
     /**
      * Creates new form MainFrame
      */
@@ -33,6 +35,7 @@ public class MainFrame extends javax.swing.JFrame {
         initComponents();
         this.setResizable(false);
         this.setLocation(500, 50);
+        
 //        JMenuBar menuBar = new JMenuBar();
 //        add(menuBar);
 //        JMenu file = new JMenu("File");
@@ -42,13 +45,13 @@ public class MainFrame extends javax.swing.JFrame {
 //        edit.setMnemonic(KeyEvent.VK_E);
         
         try {
-            dataEv = new ReadData("data/E_V.txt");
+            dataEv = new ReadData("data/tu.txt");
         } catch (IOException ex) {
             Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
         
         try {
-            dataVe = new ReadData("data/V_E.txt");
+            dataVe = new ReadData("data/tu1.txt");
         } catch (IOException ex) {
             Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -64,9 +67,9 @@ public class MainFrame extends javax.swing.JFrame {
         } catch (IOException ex) {
             Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
+        addFrame = new addWordFrame(dataEv.getMap(), dataVe.getMap());
     }
    
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -89,6 +92,14 @@ public class MainFrame extends javax.swing.JFrame {
         btSpeak = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         txtMean = new javax.swing.JTextPane();
+        jMenuBar2 = new javax.swing.JMenuBar();
+        jMenu3 = new javax.swing.JMenu();
+        subMnAdd = new javax.swing.JMenuItem();
+        subMnList = new javax.swing.JMenuItem();
+        jMenu4 = new javax.swing.JMenu();
+        jMenu7 = new javax.swing.JMenu();
+        jMenu5 = new javax.swing.JMenu();
+        jMenu6 = new javax.swing.JMenu();
 
         jMenu1.setText("File");
         jMenuBar1.add(jMenu1);
@@ -132,6 +143,42 @@ public class MainFrame extends javax.swing.JFrame {
         txtMean.setContentType("text/html"); // NOI18N
         jScrollPane1.setViewportView(txtMean);
 
+        jMenu3.setText("File");
+
+        subMnAdd.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_A, java.awt.event.InputEvent.ALT_MASK));
+        subMnAdd.setText("Add");
+        subMnAdd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                subMnAddActionPerformed(evt);
+            }
+        });
+        jMenu3.add(subMnAdd);
+
+        subMnList.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_L, java.awt.event.InputEvent.ALT_MASK));
+        subMnList.setText("Added List");
+        subMnList.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                subMnListActionPerformed(evt);
+            }
+        });
+        jMenu3.add(subMnList);
+
+        jMenuBar2.add(jMenu3);
+
+        jMenu4.setText("Edit");
+        jMenuBar2.add(jMenu4);
+
+        jMenu7.setText("Search");
+        jMenuBar2.add(jMenu7);
+
+        jMenu5.setText("Introduce");
+        jMenuBar2.add(jMenu5);
+
+        jMenu6.setText("Contact Us");
+        jMenuBar2.add(jMenu6);
+
+        setJMenuBar(jMenuBar2);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -142,13 +189,16 @@ public class MainFrame extends javax.swing.JFrame {
                 .addComponent(jLabel2)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btSearch)
-                    .addComponent(tfWord, javax.swing.GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btSpeak, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(cbSeLan, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(36, 36, 36))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(tfWord, javax.swing.GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btSpeak, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cbSeLan, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(36, 36, 36))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btSearch)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -191,11 +241,10 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void btSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSearchActionPerformed
         String word = tfWord.getText();
+        word = Std.StdStr(word);
         lbMean.setText("<html>Nghĩa của từ <b><i color='green'>" + word + "</i></b> : </html>");
         if(1 == SeLan){
-            
             try {
-                word = Std.StdStrE(word);
                 txtMean.setText(dataEv.searchMean(word));
             } catch (NullPointerException e) {
                 try {
@@ -205,7 +254,6 @@ public class MainFrame extends javax.swing.JFrame {
                 } 
             }
         }else{
-            word = Std.StdStrV(word);
             try {
                 txtMean.setText(dataVe.searchMean(word));
             } catch (NullPointerException e) {
@@ -232,10 +280,31 @@ public class MainFrame extends javax.swing.JFrame {
         Speak.voice(tfWord.getText());
     }//GEN-LAST:event_btSpeakActionPerformed
 
+    private void subMnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_subMnAddActionPerformed
+        // TODO add your handling code here:
+        addFrame.setVisible(true);
+        try {
+            dataAddedEv = new ReadData("data/addedE_V.txt");
+        } catch (IOException ex) {
+            Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
+            dataAddedVe = new ReadData("data/addedV_E.txt");
+        } catch (IOException ex) {
+            Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_subMnAddActionPerformed
+
+    private void subMnListActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_subMnListActionPerformed
+        
+        
+    }//GEN-LAST:event_subMnListActionPerformed
+
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
+        
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -262,7 +331,8 @@ public class MainFrame extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new MainFrame().setVisible(true);
+                MainFrame mf = new MainFrame();
+                mf.setVisible(true);
             }
         });
     }
@@ -276,9 +346,17 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenu jMenu3;
+    private javax.swing.JMenu jMenu4;
+    private javax.swing.JMenu jMenu5;
+    private javax.swing.JMenu jMenu6;
+    private javax.swing.JMenu jMenu7;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuBar jMenuBar2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lbMean;
+    private javax.swing.JMenuItem subMnAdd;
+    private javax.swing.JMenuItem subMnList;
     private javax.swing.JTextField tfWord;
     private javax.swing.JTextPane txtMean;
     // End of variables declaration//GEN-END:variables
