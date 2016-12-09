@@ -41,21 +41,18 @@ public class ReadData {
                     if(t.equals("<ht")){
                         str1 = temp;
                         temp = "";
-                        t = "";
-                        
+                        t = "";  
                     }
                     
                     else if(t.equals("ml>")){
                         str2 = temp + t;
                         t = "";
-                        
+                       
                     }
                     t = "";
                 }
                 str1 = Std.StdStr(str1);
                 str2 = Std.StdStr(str2);
-                System.out.println(str1);
-                System.out.println(str2);
                 map.put(str1, str2);
             }
             fileInput.close();

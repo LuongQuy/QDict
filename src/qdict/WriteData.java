@@ -15,8 +15,8 @@ import java.io.IOException;
  * @author Quy
  */
 abstract class WriteData {
-    public static void WriteFile(String fileName, String str) throws IOException{
-        BufferedWriter bw = new BufferedWriter(new FileWriter(fileName, true));
+    public static void WriteFile(String fileName, String str, boolean bool) throws IOException{
+        BufferedWriter bw = new BufferedWriter(new FileWriter(fileName, bool));
         bw.write(str);
         bw.close();
     }

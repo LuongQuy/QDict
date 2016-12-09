@@ -5,22 +5,24 @@
  */
 package qdict;
 
-import java.awt.event.KeyEvent;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JOptionPane;
-import java.io.*;
-import com.sun.speech.freetts.*;
-import javax.swing.JEditorPane;
+import java.awt.Image;
+import javax.swing.ImageIcon;
 
 /**
  *
  * @author Quy
  */
 public class MainFrame extends javax.swing.JFrame {
+    /*
+    * @param dataEv doi tuong de luu du lieu file E_V.txt
+    * @param dataVe doi tuong de luu du lieu file V_E.txt
+    * @param dataAddedEv doi tuong de luu du lieu file addedE_V.txt
+    * @param dataAddVe doi tuong de luu du lieu file addedV_E.txt
+    * @param SeLan bien de luu viec chon ngon ngu (select language)
+    */
     private ReadData dataEv;
     private ReadData dataVe;
     private ReadData dataAddedEv;
@@ -28,6 +30,11 @@ public class MainFrame extends javax.swing.JFrame {
     private int SeLan = 1;
     private boolean addBoolean = false;
     private addWordFrame addFrame;
+    private ShowListFrame showListFrame;
+    final static String FILE_PATH_EV = "data/tu.txt";
+    final static String FILE_PATH_VE = "data/tu1.txt";
+    final static String FILE_PATH_ADDED_EV = "data/addedE_V.txt";
+    final static String FILE_PATH_ADDED_VE = "data/addedV_E.txt";
     /**
      * Creates new form MainFrame
      */
@@ -36,38 +43,31 @@ public class MainFrame extends javax.swing.JFrame {
         this.setResizable(false);
         this.setLocation(500, 50);
         
-//        JMenuBar menuBar = new JMenuBar();
-//        add(menuBar);
-//        JMenu file = new JMenu("File");
-//        file.setMnemonic(KeyEvent.VK_F);
-//        menuBar.add(file);
-//        JMenu edit = new JMenu("Edit");
-//        edit.setMnemonic(KeyEvent.VK_E);
-        
         try {
-            dataEv = new ReadData("data/tu.txt");
+            dataEv = new ReadData(FILE_PATH_EV);
         } catch (IOException ex) {
             Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
         
         try {
-            dataVe = new ReadData("data/tu1.txt");
+            dataVe = new ReadData(FILE_PATH_VE);
         } catch (IOException ex) {
             Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
         
         try {
-            dataAddedEv = new ReadData("data/addedE_V.txt");
+            dataAddedEv = new ReadData(FILE_PATH_ADDED_EV);
         } catch (IOException ex) {
             Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
         
         try {
-            dataAddedVe = new ReadData("data/addedV_E.txt");
+            dataAddedVe = new ReadData(FILE_PATH_ADDED_VE);
         } catch (IOException ex) {
             Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
-        addFrame = new addWordFrame(dataEv.getMap(), dataVe.getMap());
+        addFrame = new addWordFrame(dataAddedEv.getMap(), dataAddedVe.getMap());
+        showListFrame = new ShowListFrame(dataAddedEv.getMap(), dataAddedVe.getMap());
     }
    
     /**
@@ -127,6 +127,11 @@ public class MainFrame extends javax.swing.JFrame {
         cbSeLan.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 cbSeLanItemStateChanged(evt);
+            }
+        });
+        cbSeLan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbSeLanActionPerformed(evt);
             }
         });
 
@@ -296,9 +301,12 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_subMnAddActionPerformed
 
     private void subMnListActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_subMnListActionPerformed
-        
-        
+        showListFrame.setVisible(true);
     }//GEN-LAST:event_subMnListActionPerformed
+
+    private void cbSeLanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbSeLanActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbSeLanActionPerformed
 
     /**
      * @param args the command line arguments

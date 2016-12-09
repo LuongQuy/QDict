@@ -19,6 +19,8 @@ public class addWordFrame extends javax.swing.JFrame {
     private int SeLan = 1;
     private HashMap mapEv;
     private HashMap mapVe;
+    final static String FILE_PATH_ADDED_EV = "data/addedE_V.txt";
+    final static String FILE_PATH_ADDED_VE = "data/addedV_E.txt";
     /**
      * Creates new form addWord
      */
@@ -134,8 +136,8 @@ public class addWordFrame extends javax.swing.JFrame {
                     }
                     else{
                         JOptionPane.showMessageDialog(null, "Bạn có chắc muốn thêm từ " + word, "Thêm từ", JOptionPane.INFORMATION_MESSAGE);
-                    WriteData.WriteFile("data/addedE_V.txt", str);
-                    mapEv.put(word, "<html><font color='#cc0000'><b>"+mean+"</b></font></html>");
+                        WriteData.WriteFile(FILE_PATH_ADDED_EV, str, true);
+                        mapEv.put(word, "<html><font color='#cc0000'><b>"+mean+"</b></font></html>");
                     }
                 } catch (IOException ex) {
                     Logger.getLogger(addWordFrame.class.getName()).log(Level.SEVERE, null, ex);
@@ -147,7 +149,7 @@ public class addWordFrame extends javax.swing.JFrame {
                     }
                     else{
                         JOptionPane.showMessageDialog(null, "Bạn có chắc muốn thêm từ " + word, "Thêm từ", JOptionPane.INFORMATION_MESSAGE);
-                        WriteData.WriteFile("data/addedV_E.txt", str);
+                        WriteData.WriteFile(FILE_PATH_ADDED_VE, str, true);
                         mapVe.put(word, "<html><font color='#cc0000'><b>"+mean+"</b></font></html>");
                     }
                     

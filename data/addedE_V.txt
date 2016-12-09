@@ -1,5 +1,1 @@
-﻿it<html><i>-it</i><br/><ul><li><font color='#cc0000'><b>dân công nghệ thông tin</b></font></ul></html>
-selfi<html><i>-selfi</i><br/><ul><li><font color='#cc0000'><b>chụp ảnh</b></font></ul></html>
-nhung<html><i>-nhung</i><br/><ul><li><font color='#cc0000'><b>new 1</b></font></ul></html>
-nhung<html><i>-nhung</i><br/><ul><li><font color='#cc0000'><b>new 2</b></font></ul></html>
-quy<html><ul><li><font color='#cc0000'><b>luong van quý</b></font></ul></html>
+abcd<html><font color='#cc0000'><b>doc 3 tu abcde thoi ma</b></font></html>

@@ -3,26 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Quy/Documents/NetBeansProjects/QDict/src/qdict/images/cube.gif</file>
-            <file>file:/C:/Users/Quy/Documents/NetBeansProjects/QDict/src/qdict/Speak.java</file>
-            <file>file:/C:/Users/Quy/Documents/NetBeansProjects/QDict/src/qdict/images/clear.png</file>
-            <file>file:/C:/Users/Quy/Documents/NetBeansProjects/QDict/src/qdict/images/stop.png</file>
-            <file>file:/C:/Users/Quy/Documents/NetBeansProjects/QDict/src/qdict/VoiceJFrame.java</file>
-            <file>file:/C:/Users/Quy/Documents/NetBeansProjects/QDict/src/qdict/WriteData.java</file>
-            <file>file:/C:/Users/Quy/Documents/NetBeansProjects/QDict/src/qdict/images/speaker2.png</file>
-            <file>file:/C:/Users/Quy/Documents/NetBeansProjects/QDict/src/qdict/images/back.png</file>
-            <file>file:/C:/Users/Quy/Documents/NetBeansProjects/QDict/src/qdict/Frame.java</file>
-            <file>file:/C:/Users/Quy/Documents/NetBeansProjects/QDict/src/qdict/images/mic.png</file>
             <file>file:/C:/Users/Quy/Documents/NetBeansProjects/QDict/src/qdict/ReadData.java</file>
-            <file>file:/C:/Users/Quy/Documents/NetBeansProjects/QDict/src/qdict/images/speaker.png</file>
             <file>file:/C:/Users/Quy/Documents/NetBeansProjects/QDict/src/qdict/addWordFrame.java</file>
-            <file>file:/C:/Users/Quy/Documents/NetBeansProjects/QDict/src/qdict/images/warning.png</file>
             <file>file:/C:/Users/Quy/Documents/NetBeansProjects/QDict/src/qdict/MainFrame.java</file>
-            <file>file:/C:/Users/Quy/Documents/NetBeansProjects/QDict/src/qdict/images/recorder.png</file>
-            <file>file:/C:/Users/Quy/Documents/NetBeansProjects/QDict/src/qdict/images/heart.png</file>
-            <file>file:/C:/Users/Quy/Documents/NetBeansProjects/QDict/src/qdict/ShowList.java</file>
-            <file>file:/C:/Users/Quy/Documents/NetBeansProjects/QDict/src/qdict/Std.java</file>
-            <file>file:/C:/Users/Quy/Documents/NetBeansProjects/QDict/src/qdict/images/confirm.png</file>
+            <file>file:/C:/Users/Quy/Documents/NetBeansProjects/QDict/src/qdict/WriteData.java</file>
+            <file>file:/C:/Users/Quy/Documents/NetBeansProjects/QDict/src/qdict/ShowListFrame.java</file>
         </group>
     </open-files>
 </project-private>
