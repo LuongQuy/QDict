@@ -5,9 +5,13 @@
         <group>
             <file>file:/C:/Users/Quy/Documents/NetBeansProjects/QDict/src/qdict/ReadData.java</file>
             <file>file:/C:/Users/Quy/Documents/NetBeansProjects/QDict/src/qdict/addWordFrame.java</file>
+            <file>file:/C:/Users/Quy/Documents/NetBeansProjects/QDict/src/qdict/Speak.java</file>
             <file>file:/C:/Users/Quy/Documents/NetBeansProjects/QDict/src/qdict/MainFrame.java</file>
             <file>file:/C:/Users/Quy/Documents/NetBeansProjects/QDict/src/qdict/WriteData.java</file>
+            <file>file:/C:/Users/Quy/Documents/NetBeansProjects/QDict/src/qdict/VoiceJFrame.java</file>
             <file>file:/C:/Users/Quy/Documents/NetBeansProjects/QDict/src/qdict/ShowListFrame.java</file>
+            <file>file:/C:/Users/Quy/Documents/NetBeansProjects/QDict/src/qdict/Std.java</file>
+            <file>file:/C:/Users/Quy/Documents/NetBeansProjects/QDict/src/qdict/Introduce.java</file>
         </group>
     </open-files>
 </project-private>

@@ -31,6 +31,7 @@ public class MainFrame extends javax.swing.JFrame {
     private boolean addBoolean = false;
     private addWordFrame addFrame;
     private ShowListFrame showListFrame;
+    private Introduce introduce;
     final static String FILE_PATH_EV = "data/tu.txt";
     final static String FILE_PATH_VE = "data/tu1.txt";
     final static String FILE_PATH_ADDED_EV = "data/addedE_V.txt";
@@ -68,6 +69,7 @@ public class MainFrame extends javax.swing.JFrame {
         }
         addFrame = new addWordFrame(dataAddedEv.getMap(), dataAddedVe.getMap());
         showListFrame = new ShowListFrame(dataAddedEv.getMap(), dataAddedVe.getMap());
+        introduce = new Introduce();
     }
    
     /**
@@ -96,9 +98,8 @@ public class MainFrame extends javax.swing.JFrame {
         jMenu3 = new javax.swing.JMenu();
         subMnAdd = new javax.swing.JMenuItem();
         subMnList = new javax.swing.JMenuItem();
-        jMenu4 = new javax.swing.JMenu();
-        jMenu7 = new javax.swing.JMenu();
         jMenu5 = new javax.swing.JMenu();
+        subMnIntroduce = new javax.swing.JMenuItem();
         jMenu6 = new javax.swing.JMenu();
 
         jMenu1.setText("File");
@@ -151,7 +152,7 @@ public class MainFrame extends javax.swing.JFrame {
         jMenu3.setText("File");
 
         subMnAdd.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_A, java.awt.event.InputEvent.ALT_MASK));
-        subMnAdd.setText("Add");
+        subMnAdd.setText("Add New Word");
         subMnAdd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 subMnAddActionPerformed(evt);
@@ -159,8 +160,8 @@ public class MainFrame extends javax.swing.JFrame {
         });
         jMenu3.add(subMnAdd);
 
-        subMnList.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_L, java.awt.event.InputEvent.ALT_MASK));
-        subMnList.setText("Added List");
+        subMnList.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_E, java.awt.event.InputEvent.ALT_MASK));
+        subMnList.setText("Edit & Delete");
         subMnList.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 subMnListActionPerformed(evt);
@@ -170,13 +171,17 @@ public class MainFrame extends javax.swing.JFrame {
 
         jMenuBar2.add(jMenu3);
 
-        jMenu4.setText("Edit");
-        jMenuBar2.add(jMenu4);
-
-        jMenu7.setText("Search");
-        jMenuBar2.add(jMenu7);
-
         jMenu5.setText("Introduce");
+
+        subMnIntroduce.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_I, java.awt.event.InputEvent.ALT_MASK));
+        subMnIntroduce.setText("Introduce");
+        subMnIntroduce.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                subMnIntroduceActionPerformed(evt);
+            }
+        });
+        jMenu5.add(subMnIntroduce);
+
         jMenuBar2.add(jMenu5);
 
         jMenu6.setText("Contact Us");
@@ -308,6 +313,10 @@ public class MainFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_cbSeLanActionPerformed
 
+    private void subMnIntroduceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_subMnIntroduceActionPerformed
+        introduce.setVisible(true);
+    }//GEN-LAST:event_subMnIntroduceActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -355,15 +364,14 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
-    private javax.swing.JMenu jMenu4;
     private javax.swing.JMenu jMenu5;
     private javax.swing.JMenu jMenu6;
-    private javax.swing.JMenu jMenu7;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuBar jMenuBar2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lbMean;
     private javax.swing.JMenuItem subMnAdd;
+    private javax.swing.JMenuItem subMnIntroduce;
     private javax.swing.JMenuItem subMnList;
     private javax.swing.JTextField tfWord;
     private javax.swing.JTextPane txtMean;
