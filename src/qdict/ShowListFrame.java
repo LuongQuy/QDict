@@ -10,6 +10,7 @@ import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -218,7 +219,7 @@ public class ShowListFrame extends javax.swing.JFrame {
                 }
                 jListWord.setModel(modelVe);
             }
-            
+            jEditorMeanOfWord.setText("");
         }
     }//GEN-LAST:event_btDeleteActionPerformed
 
@@ -233,25 +234,29 @@ public class ShowListFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_cbSelectLanguageItemStateChanged
 
     private void brCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_brCloseActionPerformed
-//        newMapEv.clear();
-//        newMapVe.clear();
-//        newMapEv = mapEv;
-//        newMapVe = mapVe;
-        for(String key : newMapEv.keySet()){
-            try {
-                WriteData.WriteFile(FILE_PATH_ADDED_EV, key+mapEv.get(key)+"\r\n", false);
-            } catch (IOException ex) {
-                Logger.getLogger(ShowListFrame.class.getName()).log(Level.SEVERE, null, ex);
+        try {
+            WriteData.WriteFile(FILE_PATH_ADDED_EV, "", false);
+            WriteData.WriteFile(FILE_PATH_ADDED_VE, "", false);
+            for(String key : newMapEv.keySet()){
+                try {
+                    WriteData.WriteFile(FILE_PATH_ADDED_EV, key+mapEv.get(key)+"\r\n", true);
+                    System.out.println(key+mapVe.get(key)+"\r\n");
+                } catch (IOException ex) {
+                    WriteData.WriteFile(FILE_PATH_ADDED_EV, "", true);
+                }
             }
-        }
-        for(String key : newMapVe.keySet()){
-            try {
-                WriteData.WriteFile(FILE_PATH_ADDED_VE, key+mapVe.get(key)+"\r\n", false);
-            } catch (IOException ex) {
-                Logger.getLogger(ShowListFrame.class.getName()).log(Level.SEVERE, null, ex);
+            for(String key : newMapVe.keySet()){
+                try {
+                    WriteData.WriteFile(FILE_PATH_ADDED_VE, key+mapVe.get(key)+"\r\n", true);
+                    System.out.println(key+mapVe.get(key)+"\r\n");
+                } catch (IOException ex) {
+                    WriteData.WriteFile(FILE_PATH_ADDED_VE, "", true);
+                }
             }
+            this.setVisible(false);
+        } catch (IOException ex) {
+            Logger.getLogger(ShowListFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
-        this.setVisible(false);
     }//GEN-LAST:event_brCloseActionPerformed
 
     private void jListWordValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jListWordValueChanged
